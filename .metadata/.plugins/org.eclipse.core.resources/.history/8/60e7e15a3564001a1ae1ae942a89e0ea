@@ -1,0 +1,8 @@
+package com.example.demo;
+import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+
+public class customerRepository extends CrudRepository<customer,String>{
+	List<customer> findByS_ScheduledDate(String s_ScheduledDate);
+
+}

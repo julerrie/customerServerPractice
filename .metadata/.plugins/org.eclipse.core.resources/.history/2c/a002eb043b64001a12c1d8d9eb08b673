@@ -1,0 +1,26 @@
+package com.example.demo;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import java.io.File;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@SpringBootApplication
+public class DemoApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DemoApplication.class, args);
+	}
+	
+	@Bean
+	public CommandLineRunner loadData(customerRepository repository) {
+		return (args) -> {
+			ObjectMapper objectMapper = new ObjectMapper();
+			customer newCustomer = objectMapper.readValue(new File("customer.json"), customer.class);
+			repository.save(newCustomer);
+			
+		};
+	}
+}
