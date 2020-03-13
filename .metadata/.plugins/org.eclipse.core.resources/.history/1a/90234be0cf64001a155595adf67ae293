@@ -1,0 +1,8 @@
+package com.example.demo;
+
+public class ReturnClass {
+	private String message;
+	private List<Customer> results;
+	
+
+}

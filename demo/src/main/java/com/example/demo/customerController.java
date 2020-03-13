@@ -1,6 +1,47 @@
 package com.example.demo;
 
-public class customerController {
-	
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@RestController
+public class CustomerController {
+	private final CustomerRepository repository;
+	
+	public CustomerController(CustomerRepository repository) {
+		this.repository = repository;
+	}
+	
+	@GetMapping("/getDataFromScheduledDate")
+	ReturnClass getDataFromDate(@RequestParam String date) {
+		ReturnClass newReturn = new ReturnClass();
+		newReturn.setMessage("");
+		newReturn.setStatus("");
+		newReturn.setResults(repository.findBysScheduledDate(date));
+		return newReturn;
+	}
+
+	@GetMapping("/test")
+	List<Customer> returnCustmer() throws IOException {
+		List <Customer> newCustomers = new ArrayList<Customer>();
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			InputStream inputStream =  this.getClass().getResourceAsStream("/customer.json");
+			newCustomers = Arrays.asList(objectMapper.readValue(inputStream, Customer[].class));
+			return newCustomers;
+		} catch (IOException e) {
+	        e.printStackTrace();
+	        return newCustomers;
+		}
+	}
 }

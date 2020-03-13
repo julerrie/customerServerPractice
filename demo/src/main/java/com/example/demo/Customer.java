@@ -1,10 +1,16 @@
 package com.example.demo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Customer {
-	    /// <App only>顧客id（s_ScheduledDate_s_GouBan_s_GasSecchi）、加工必要
-	    //public String s_customer_id;
-	    /// 社番番号
+		@Id @GeneratedValue(strategy=GenerationType.AUTO)
+		private Long id;
+		/// 社番番号
 	    private String s_MeterNo;
 	    /// 即検針日
 	    private String s_SokuDate;
@@ -175,7 +181,8 @@ public class Customer {
 	    /// 検針区分コード
 	    private String s_DivisionCd;
 	    /// 検針予定日
-	    private String s_ScheduledDate;
+	    @Column(name = "s_ScheduledDate", nullable = false)
+	    private String sScheduledDate;
 	    /// デマンドコード
 	    private String s_DemandCd;
 	    ///　接客分類コード01（不在）
@@ -749,10 +756,10 @@ public class Customer {
 			this.s_DivisionCd = s_DivisionCd;
 		}
 		public String getS_ScheduledDate() {
-			return s_ScheduledDate;
+			return sScheduledDate;
 		}
 		public void setS_ScheduledDate(String s_ScheduledDate) {
-			this.s_ScheduledDate = s_ScheduledDate;
+			this.sScheduledDate = s_ScheduledDate;
 		}
 		public String getS_DemandCd() {
 			return s_DemandCd;

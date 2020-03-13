@@ -1,0 +1,20 @@
+package com.example.demo;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+public class CustomerController {
+	private final CustomerRepository repository;
+	
+	public CustomerController(CustomerRepository repository) {
+		this.repository = repository;
+	}
+	
+	@GetMapping("/getDataFromScheduledDate")
+	ReturnClass getDataFromDate(@RequestParam String date) {
+		ReturnClass newReturn = new ReturnClass();
+		
+		return repository.findByS_ScheduledDate(date);
+	}
+
+}

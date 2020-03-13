@@ -1,0 +1,6 @@
+package com.example.demo;
+
+public class CustomerController {
+	private final CustomerRepository repository;
+
+}
