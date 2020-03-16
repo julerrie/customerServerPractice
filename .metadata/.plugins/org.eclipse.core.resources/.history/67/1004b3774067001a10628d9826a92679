@@ -1,0 +1,13 @@
+package com.example.demo;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+public interface CustomerRepository extends JpaRepository<Customer, Long>{
+	List<Customer> findBydate(String s_ScheduledDate);
+	@Query("select c from Customer c where c.s_ScheduledDate=?1 and c.s_GasSecchi=?2 and c.s_GouBan=?3")
+	Customer findByCustomerId(String s_ScheduledDate, String s_GasSecchi, String s_GouBan);
+	Customer findById(long id);
+}

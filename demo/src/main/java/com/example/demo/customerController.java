@@ -1,14 +1,14 @@
 package com.example.demo;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,6 +42,60 @@ public class CustomerController {
 		} catch (IOException e) {
 	        e.printStackTrace();
 	        return newCustomers;
+		}
+	}
+	
+	@PostMapping("/updateCustomer")
+	String updateCustomer(@RequestBody Customer updatedCustomer) throws Exception {
+		try {
+			System.out.print(updatedCustomer);
+			String scheduleDate = updatedCustomer.getS_ScheduledDate();
+			String gouban = updatedCustomer.getS_GouBan();
+			String gassecchi = updatedCustomer.getS_GasSecchi();
+			Customer oldCustomer = repository.findByCustomerId(scheduleDate, gassecchi, gouban);
+			
+			//情報更新
+	        oldCustomer.setS_HohoCd(updatedCustomer.getS_HohoCd());
+	        oldCustomer.setS_UseCd(updatedCustomer.getS_UseCd());
+	        oldCustomer.setS_MichiCd(updatedCustomer.getS_MichiCd());
+	        oldCustomer.setS_PrevChr(updatedCustomer.getS_PrevChr());
+	        oldCustomer.setS_LockNo(updatedCustomer.getS_LockNo());
+	        oldCustomer.setS_AftrChr(updatedCustomer.getS_AftrChr());
+	        oldCustomer.setS_Man(updatedCustomer.getS_Man());
+	        oldCustomer.setS_Shiji(updatedCustomer.getS_Shiji());
+	        oldCustomer.setS_ShiyouRyo(updatedCustomer.getS_ShiyouRyo());
+	        oldCustomer.setS_HazusiSijisu(updatedCustomer.getS_HazusiSijisu());
+	        oldCustomer.setS_TsukeSijisu(updatedCustomer.getS_TsukeSijisu());
+	        oldCustomer.setS_TorokuMix5(updatedCustomer.getS_TorokuMix5());
+	        oldCustomer.setS_Tokuryo2(updatedCustomer.getS_Tokuryo2());
+	        oldCustomer.setS_Tokuryo3(updatedCustomer.getS_Tokuryo3());
+	        oldCustomer.setS_Tokuryo4(updatedCustomer.getS_Tokuryo4());
+	        oldCustomer.setS_Tokuryo6(updatedCustomer.getS_Tokuryo6());
+	        oldCustomer.setS_Tokuryo7(updatedCustomer.getS_Tokuryo7());
+	        oldCustomer.setS_Idog(updatedCustomer.getS_Idog());
+	        oldCustomer.setS_Odog(updatedCustomer.getS_Odog());
+	        oldCustomer.setS_IDogCd(updatedCustomer.getS_IDogCd());
+	        oldCustomer.setS_ODogCd(updatedCustomer.getS_ODogCd());
+	        oldCustomer.setS_JokyoCd(updatedCustomer.getS_JokyoCd());
+	        oldCustomer.setS_KyakuBunCd08(updatedCustomer.getS_KyakuBunCd08());
+	        oldCustomer.setS_KyakuNaiyo08(updatedCustomer.getS_KyakuNaiyo08());
+	        oldCustomer.setS_CompCd(updatedCustomer.getS_CompCd());
+	        oldCustomer.setS_PossStart(updatedCustomer.getS_PossStart());
+	        oldCustomer.setS_PossEnd(updatedCustomer.getS_PossEnd());
+	        oldCustomer.setS_PossWeek(updatedCustomer.getS_PossWeek());
+	        oldCustomer.setS_IchiCd(updatedCustomer.getS_IchiCd());
+	        oldCustomer.setS_Sikenbari(updatedCustomer.getS_Sikenbari());
+	        oldCustomer.setS_RenzokuZeroJiyu(updatedCustomer.getS_RenzokuZeroJiyu());
+	        oldCustomer.setS_KenSeq(updatedCustomer.getS_KenSeq());
+	        oldCustomer.setS_HohoCd(updatedCustomer.getS_HohoCd());
+	        oldCustomer.setS_HohoCd(updatedCustomer.getS_HohoCd());
+	        repository.save(oldCustomer);
+	        System.out.print(oldCustomer.getS_CompCd());
+	        System.out.printf( "update successfully");
+	        return "update successfully";
+		} catch (Exception e) {
+			System.out.print(e);
+			return "some error happened";
 		}
 	}
 }
